@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html>
+
+   <head>
+
+      <script type="text/javascript">
+
+         var db = openDatabase('mydb', '1.0', 'Test DB', 2 * 1024 * 1024);
+         var msg;
+
+         db.transaction(function (tx) {
+            tx.executeSql('CREATE TABLE IF NOT EXISTS DICT (key unique, val)');
+            tx.executeSql('INSERT INTO DICT (key, val) VALUES ("a", "a article")');
+            tx.executeSql('INSERT INTO DICT (key, val) VALUES ("A", "A article")');
+            msg = '<p>Dictionary created and row inserted.</p>';
+            document.querySelector('#status').innerHTML =  msg;
+         });
+
+         db.transaction(function (tx) {
+            tx.executeSql('SELECT * FROM DICT', [], function (tx, results) {
+               var len = results.rows.length, i;
+               msg = "<p>Found rows: " + len + "</p>";
+               document.querySelector('#status').innerHTML +=  msg;
+
+               for (i = 0; i < len; i++){
+                  msg = "<p><b>" + results.rows.item(i).key + "</b></p><br>" + results.rows.item(i).val + "<br>";
+                  document.querySelector('#status').innerHTML +=  msg;
+               }
+            }, null);
+         });
+
+      </script>
+
+   </head>
+
+   <body>
+      <div id="status" name="status">Status Message</div>
+   </body>
+
+</html>
