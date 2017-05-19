@@ -1,3 +1,39 @@
+# 20-05-2017
+Add index.html
+# Initial version
+
+## How to install
+At first time and only once you need to open html with incapsulated javascript for creating dictionary.<br>
+Now there is only one dictionary:
+* wil.html - Wilson Sanskrit-English Dictionary
+
+Please be patient. Filling of the database is low-priority asynchronous process for the browser.
+Approximately it takes several minutes.
+To be convinced that the database was successfully created click F12 and then go to the Application tab: Web SQL -> mydb -> DICT
+
+## How to create dictionary
+Dictionary html files with incapsulated javascript are converted by java app Xml2JS  from https://github.com/juhnowski/Xml2JS
+
+## How to use
+### Open <a href="fetching.html">fetching.html</a> print word in input box and press Enter.<br></h2>
+Settings works only for online version.<br>
+It was tested in Google Chrom 58.0.3029.110 (64-bit).<br>
+If you want to use it in mobile browser there are two way:
+* put files in public folder of webserver (for instance Apache, IIS, Nginx, Python Simple HTTP server ...), download, and open from local folder
+* transfer it to mobile file system some way (by USB, or by e-mail) and then open it in chrome mobile browser</li>
+
+### It's expected that it will be worked in browsers:
+* Chromium
+* Firefox
+
+## TODO
+* Create browser plugin for Google Chrome
+* Investigate Safari and IE capabilities
+* Convert all dictionaries from http://www.sanskrit-lexicon.uni-koeln.de/ - Cologne Digital Sanskrit Dictionaries
+
+
+
+
 # 19-05-2017
 Fork juhnowski/sanskrit-simple-search
 File test_web_sql.html - template for working with WebSQL Database in Chrome.

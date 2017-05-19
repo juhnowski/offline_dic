@@ -11,6 +11,8 @@
 
 
 /**
+agadaNkAra - test word
+
   Vocabulary article is parsed and stored to following class
 
   By following URL:
@@ -27,6 +29,14 @@
 
 */
 class Word {
+  constructor (key, val) {
+    this.html = val;
+    this.article = val;
+    this.name = key;
+    this.L = 0;
+    this.frequency = localStorage.getItem(this.name);
+  }
+/*
   constructor(html) {
     this.html = html;
     this.parse();
@@ -36,7 +46,7 @@ class Word {
     }
     console.log("this.name=|"+this.name+"|");
   }
-
+*/
   toString() {
       return "("+this.frequency+")"+this.name;
   }
@@ -131,17 +141,17 @@ function onGetDataTimeout() {
         this.filter = initialData.filter;
         this.noLit = initialData.noLit;
         this.transLit = initialData.transLit;
-        this.isGetDataProcessing = false;
+      //  this.isGetDataProcessing = false;
         this.cleanWordslist();
       }
 
       setKey(key) {
         //key may be changed as quick as user print. That's why we need check that
         // latest call fo getData function has been done.
-        if (this.isGetDataProcessing) {
+      /*  if (this.isGetDataProcessing) {
           return;
         }
-
+*/
         //we didn't find empty word, but it's needed to clean wordslist
         if (key==="") {
           cleanWordslist();
@@ -156,12 +166,35 @@ function onGetDataTimeout() {
       }
 
       getData() {
-        this.isGetDataProcessing = true;
+        console.log("getData()");
+      //  this.isGetDataProcessing = true;
         if (this.noLit==null){
           this.noLit = localStorage.getItem('settings.noLit');
         }
-        var dataurl = this.url + "?key="+this.key+"&filter="+this.filter+"&noLit="+this.noLit+"&transLit=" + this.transLit;
+        //var dataurl = this.url + "?key="+this.key+"&filter="+this.filter+"&noLit="+this.noLit+"&transLit=" + this.transLit;
         handleCount++;
+        var key = this.key;
+        if (this.wordslist==null){
+          this.wordslist = [];
+        }
+
+        db.transaction(function (tx) {
+          console.log("this.key="+key);
+           tx.executeSql('SELECT * FROM DICT WHERE key = \''+key+'\'', [], function (tx, results) {
+              var len = results.rows.length, i;
+              //msg = "<p>Found rows: " + len + "</p>";
+              //document.querySelector('#status').innerHTML +=  msg;
+
+              for (i = 0; i < len; i++){
+                let w = new Word(results.rows.item(i).key, results.rows.item(i).val);
+
+                w.write();
+                // msg = "<p><b>" + results.rows.item(i).key + "</b></p><br>" + results.rows.item(i).val + "<br>";
+                // document.querySelector('#status').innerHTML +=  msg;
+              }
+           }, null);
+        });
+        /*
           $.ajax({
             url: dataurl,
             cache: false,
@@ -197,6 +230,8 @@ function onGetDataTimeout() {
             .fail(function( jqXHR, textStatus, errorThrown){
               errlist.push(dataurl + " " +textStatus.toString()+" "+errorThrown.toString()+"<br>");
             });
+*/
+
       }
     }
 
@@ -365,6 +400,7 @@ function getVariants(word){
     </script>
 
     <script>
+    var db = openDatabase('mydb', '1.0', 'Test DB', 2 * 1024 * 1024);
     var llist = [];
     var errlist = [];
     var handleCount = 0;
@@ -385,6 +421,7 @@ function getVariants(word){
     });
 
     function test(find_word) {
+
       llist = [];
       errlist = [];
       handleCount = 0;

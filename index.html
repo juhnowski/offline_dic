@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Offline sanskrit dictionary</title>
+  </head>
+  <body>
+    <h1>How to install</h1>
+    At first time and only once you need to open html with incapsulated javascript for creating dictionary.<br>
+    Now there is only one dictionary:
+    <ul>
+      <li><a href="wil.html">Wilson Sanskrit-English Dictionary</a></li>
+    </ul>
+    Please be patient. Filling of the database is low-priority asynchronous process for the browser. Approximately it takes several minutes.<br>
+    To be convinced that the database was successfully created click F12 and then go to the Application tab: Web SQL -> mydb -> DICT
+
+    <h1>How to create dictionary</h1>
+    Dictionary html files with incapsulated javascript are converted by java app <a href="https://github.com/juhnowski/Xml2JS">Xml2JS</a>
+
+    <h1>How to use</h1>
+    <h2>Open <a href="fetching.html">fetching.html</a> print word in input box and press Enter.<br></h2>
+    Settings works only for online version.<br>
+    It was tested in Google Chrom 58.0.3029.110 (64-bit).<br>
+    If you want to use it in mobile browser there are two way:
+    <ul>
+      <li>put files in public folder of webserver (for instance Apache, IIS, Nginx, Python Simple HTTP server ...)</li>
+      <li>transfer it to mobile file system some way (by USB, or by e-mail) and then open it in chrome mobile browser</li>
+    </ul>
+    It's expected that it will be worked in browsers:
+    <ul>
+      <li>Chromium</li>
+      <li>Firefox</li>
+    </ul>
+
+  <h1>TODO</h1>
+  <ul>
+    <li>Create browser plugin for Google Chrome</li>
+    <li>Investigate Safari and IE capabilities</li>
+    <li>Convert all dictionaries from <a href="http://www.sanskrit-lexicon.uni-koeln.de/">Cologne Digital Sanskrit Dictionaries</a></li>
+  </ul>
+  </body>
+</html>
