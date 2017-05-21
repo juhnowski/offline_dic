@@ -1,3 +1,6 @@
+# 21-05-2017
+Append Sanskrit-English Dictionaries
+
 # 20-05-2017
 Add index.html
 # Initial version
